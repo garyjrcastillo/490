@@ -1,5 +1,15 @@
 <?php
 session_start();
+
+unset( $_SESSION["register"] );
+
+//$_SESSION = array();
+//session_destroy();
+
+//session_start();
+
+$_SESSION["index"] = 'true';
+
 #include("config.php");
 //by default SESSION[loggedin] has no value
 //$_SESSION['loggedin'] = true;
@@ -9,9 +19,8 @@ if(isset($_SESSION["loggedin"])){
 }
 
 if(isset($_SESSION["wrong"])){
-        print("INVALID USERNAME OR PASSWORD");
+        print("WRONG USERNAME OR PASSWORD");
 }
-
 
 
 ?>
@@ -46,7 +55,7 @@ if(isset($_SESSION["wrong"])){
 						</div>
 
 						<div class = "form-group">
-							<a href ="registration.html">Register</a>
+							<a name= "regLink" href ="register.php">Register</a>
 						</div>
                                         </div>
                                 </div>
