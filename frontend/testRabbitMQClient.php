@@ -42,7 +42,7 @@ $request = array();
 	if ($response==1){
 		echo("RESPONSE WORKED");
 		$_SESSION["sessionId"] = 'random';
-		header("Location: welcome.php");
+		header("Location: mainpage.php");
 	}
 	else{
 		echo("WRONG RESPONSE");
@@ -70,7 +70,7 @@ if(isset($_SESSION["register"])){
 	print_r($response);
 
 	if ($response ==1){
-		header("Location: test.php");
+		header("Location: index.php");
 	}
 }
 
@@ -88,6 +88,9 @@ if(isset($_SESSION["validate"])){
 	{
 		header("Location: index.php");
 	}
+	
+	
+
 }
 
 //if(isset($_SESSION["index"])){
