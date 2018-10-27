@@ -33,6 +33,36 @@ function doLogin($username,$password)
 	//return false if not valid
 }
 
+function doRegister($username, $password)
+{
+	
+	include('config.php');
+
+	$s = "insert into loginform (username, password)  values ('$username','$password' ) ";
+	print "<br>SQL Insert statement is $s ";
+
+	//($t = mysqli_query($db,$s) ) or die(mysqli_error($db) );
+
+	//print "<br>SQL Insert loginform statement was transmitted for execution.<br>";
+
+	if( $t=mysqli_query($db,$s) ){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
+function doValidate($sessionId){
+	if ($sessionId == 'random')
+	{
+		return true;
+	}	
+	else{
+		return false;
+	}
+}
+
 function requestProcessor($request)
 {
   echo "received request".PHP_EOL;
@@ -45,9 +75,11 @@ function requestProcessor($request)
   {
     case "login":
       return doLogin($request['username'],$request['password']);
- 
-    case "EXAMPLE":
-      return true;
+
+    //case "register":
+//	    return true;
+    case "register":
+      return doRegister($request['username'],$request['password']);
 
     case "validate_session":
       return doValidate($request['sessionId']);
