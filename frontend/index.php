@@ -14,9 +14,12 @@ $_SESSION["index"] = 'true';
 //by default SESSION[loggedin] has no value
 //$_SESSION['loggedin'] = true;
 //if they are signed in. (if they dont sign out, then they will keep being signed in until browser is closed.
-if(isset($_SESSION["loggedin"])){
-	header("location: welcome.php");
+
+if(($_SESSION["sessionId"]== 'random')){
+	//header("Location: welcome.php");
+	header("Location: mainpage.php");
 }
+
 
 if(isset($_SESSION["wrong"])){
         print("WRONG USERNAME OR PASSWORD");
