@@ -1,0 +1,14 @@
+
+Table 'users.loginforms' doesn't exist 
+
+AMQPConnectionException: Server connection error: 403, message: ACCESS_REFUSED - Login was refused using authentication mechanism PLAIN. For details see the broker logfile. - Potential login failure. in /home/gary/490/backend/rabbitMQLib.inc:111
+Stack trace:
+#0 /home/gary/490/backend/rabbitMQLib.inc(111): AMQPConnection->connect()
+#1 /home/gary/490/backend/testRabbitMQServer.php(103): rabbitMQServer->process_requests('requestProcesso...')
+#2 {main}
+
+AMQPConnectionException: Server connection error: 403, message: ACCESS_REFUSED - Login was refused using authentication mechanism PLAIN. For details see the broker logfile. - Potential login failure. in /home/gary/490/backend/rabbitMQLib.inc:118
+Stack trace:
+#0 /home/gary/490/backend/rabbitMQLib.inc(118): AMQPConnection->connect()
+#1 /home/gary/490/backend/testRabbitMQServer.php(102): rabbitMQServer->process_requests('requestProcesso...')
+#2 {main}
