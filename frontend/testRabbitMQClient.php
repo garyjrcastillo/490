@@ -5,7 +5,7 @@ require_once('get_host_info.inc');
 require_once('rabbitMQLib.inc');
 
 #include("index.php");
-
+//
 
 session_start();
 $client = new rabbitMQClient("testRabbitMQ.ini","testServer");
