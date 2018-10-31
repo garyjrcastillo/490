@@ -2,11 +2,35 @@
 
 session_start();
 
-unset( $_SESSION["register"] );
-unset( $_SESSION["index"] );
+unset( $_SESSION["register"] ); //so when rabbitMQClient executes it won't use the register function
+unset( $_SESSION["index"] ); //so when rabbitMQClient executes it won't use the index function (which is logging in)
 
-$_SESSION["validate"] = 'true';
+
+$_SESSION["validate"] = 'true'; //so rabbitMQClient will check to see if they are validated
 include ("testRabbitMQClient.php");
+
+$item1 = $_POST["item1"];
+$_SESSION["item1"] = $item1;
+
+$item2 = $_POST["item2"];
+$item3 = $_POST["item3"];
+$item4 = $_POST["item4"];
+$item5 = $_POST["item5"];
+$item6 = $_POST["item6"];
+
+$select1 = $_POST["select1"];
+$select2 = $_POST["select2"];
+$select3 = $_POST["select3"];
+$select4 = $_POST["select4"];
+$select5 = $_POST["select5"];
+
+
+if(isset($_POST['submit'])){
+	echo ($_POST["item1"]);
+	$_SESSION["item1"] = $item1;
+}
+
+
 
 ?>
 
@@ -75,10 +99,10 @@ include ("testRabbitMQClient.php");
 		</div>
 	</div>
 	<div class="carousel-item">
-		<img src="img/background.png">
+		<img src="img/burger.png">
 	</div>
 	<div class="carousel-item">
-		<img src="img/background.png">
+		<img src="img/burger.png">
 	</div>
 </div>
 </div>
@@ -90,7 +114,7 @@ include ("testRabbitMQClient.php");
 		<p class="lead">This will be some paragraph/text that we will be putting in . Need to be changed.</p>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-2">
-		<a href="#"><button type= "button class="btn btn-outline-secondary btn-lg"> Button</button></a>
+		<a href="#"><button type= "button class="btn btn-outline-secondary btn-lg > Button</button></a>
 	</div>
 </div>
 </div>
@@ -114,24 +138,79 @@ include ("testRabbitMQClient.php");
 
 
 <!--- Two Column Section -->
+
+<form method="post" action = "test.php">
 <div class="container-fluid padding">
 <div class="row padding">
 	<div class="col-md-12 col-lg-6">
-		<h2>Just leave it here to add stuff </h2>
-		<p> paragraph fkelwajfekwla fkwlaef jweklfjwkleaf jwklaef jewklaf jweklfj awlekfj ekwa.</p>
-		<p> gewijgkwleajgklweagjkwleagjklwegj klwgklw jgklwe gjwlek gjweklag jwakleg jweklg jwekl</p>
-		<p> gjewklagjwekla gkwleg jwklag jwelkag jweklag jwalkeg jwaeklg jweklag jwekalg jwkel gawl</p>
+		<h2>Please Tell Us What You Ate Today! </h2>
+		<p> .</p>
+		<div class="form-group">
+    <label for="exampleFormControlInput1">Item 1</label>
+    <input type="text" class="form-control" id="Item1" name="item1" placeholder="Enter Food or Drink "> 
+   <select name="select1">
+	<option value= "GroceryFood">Grocery Food</option>
+	<option value= "FoodMenu"> Food Menu</option>
+  </select>
+<br>
+    <label for="exampleFormControlInput1">Item 2</label>
+    <input type="text" class="form-control" id="Item2" name="item2" placeholder="Enter Food or Drink">
+<select name = "select2">
+        <option value= "GroceryFood">Grocery Food</option>
+        <option value= "FoodMenu"> Food Menu</option>
+  </select>
+<br>
+    <label for="exampleFormControlInput1">Item 3</label>
+    <input type="text" class="form-control" id="Item3" name ="item3" placeholder="Enter Food or Drink">
+
+<select name = "select3">
+        <option value= "GroceryFood">Grocery Food</option>
+        <option value= "FoodMenu"> Food Menu</option>
+  </select>
+<br>
+    <label for="exampleFormControlInput1">Item 4</label>
+    <input type="text" class="form-control" id="Item4" name="item4" placeholder="Enter Food or Drink">
+
+<select name= "select4">
+        <option value= "GroceryFood">Grocery Food</option>
+        <option value= "FoodMenu"> Food Menu</option>
+  </select>
+<br>
+    <label for="exampleFormControlInput1">Item 5</label>
+    <input type="text" class="form-control" id="Item5" name="item5" placeholder="Enter Food or Drink">
+   <select name= "select5">
+
+	<option value = "GroceryFood">Grocery Food</option>
+	<option value = "FoodMenu"> Food Menu</option>
+
+  </select>
+<br>
+   <label for="exampleFormControlInput1"> Max Calories (Required) </label>
+   <input type = "text" class = "form-control" id = "Item6" name = "item6" placeholder = "Enter your desired Max Calories per day">
+
+    <input type="submit" name="submit" value="Submit" class="btn btn-success btn-block btn-lg">
+
+
+
+  </div>
+
+
+
+
 		<br>
 		
-	</div>
+
 	<div class="col-lg-6">
 		<img src="img/placeholder.png" class="img-fluid">
 	</div>
 
 </div>
 </div>
+</form>
+
 
 <hr class="my-4">
+
 <!--- Fixed background -->
 <figure>
 	<div class="fixed-wrap">
