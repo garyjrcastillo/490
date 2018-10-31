@@ -83,7 +83,15 @@ class rabbitMQServer
 		catch(Exception $e)
 		{
 			// ampq throws exception if get fails...
-            echo "error: rabbitMQServer: process_message: exception caught: ".$e;
+			echo "error: rabbitMQServer: process_message: exception caught: ".$e;
+
+
+			error_log("\n". $e ."\n",3, "/home/gary/490/backend/log2.txt");
+
+			echo ("\n". "Error appended to log2.txt" . "\n" );
+
+
+
 		}
 		// message does not require a response, send ack immediately
 		$body = $msg->getBody();
@@ -129,7 +137,13 @@ class rabbitMQServer
 		}
 		catch (Exception $e)
 		{
-			trigger_error("Failed to start request processor: ".$e,E_USER_ERROR); 
+			
+			error_log("\n". $e ."\n",3, "/home/gary/490/backend/log2.txt");
+
+			echo ("\n". "Error appended to log2.txt" . "\n" );
+
+
+			trigger_error("Failed to start request processor: ".$e,E_USER_ERROR);
 		}
 	}
 }
@@ -229,6 +243,12 @@ class rabbitMQClient
 		}
 		catch(Exception $e)
 		{
+
+		      	error_log("\n". $e ."\n",3, "/home/gary/490/backend/log2.txt");
+
+                        echo ("\n". "Error appended to log2.txt" . "\n" );
+
+
 			die("failed to send message to exchange: ". $e->getMessage()."\n");
 		}
 	}
@@ -264,6 +284,12 @@ class rabbitMQClient
 		}
 		catch(Exception $e)
 		{
+
+			error_log("\n". $e ."\n",3, "/home/gary/490/backend/log2.txt");
+
+                        echo ("\n". "Error appended to log2.txt" . "\n" );
+
+
 			die("failed to send message to exchange: ". $e->getMessage()."\n");
 		}
 	}
