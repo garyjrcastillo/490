@@ -9,27 +9,6 @@ unset( $_SESSION["index"] ); //so when rabbitMQClient executes it won't use the 
 $_SESSION["validate"] = 'true'; //so rabbitMQClient will check to see if they are validated
 include ("testRabbitMQClient.php");
 
-$item1 = $_POST["item1"];
-$_SESSION["item1"] = $item1;
-
-$item2 = $_POST["item2"];
-$item3 = $_POST["item3"];
-$item4 = $_POST["item4"];
-$item5 = $_POST["item5"];
-$item6 = $_POST["item6"];
-
-$select1 = $_POST["select1"];
-$select2 = $_POST["select2"];
-$select3 = $_POST["select3"];
-$select4 = $_POST["select4"];
-$select5 = $_POST["select5"];
-
-
-if(isset($_POST['submit'])){
-	echo ($_POST["item1"]);
-	$_SESSION["item1"] = $item1;
-}
-
 
 
 ?>
@@ -66,9 +45,6 @@ if(isset($_POST['submit'])){
  			<a class="nav-link" href="#about">About</a>                     
  		</li>
  		<li class="nav-item">
- 			<a class="nav-link" href="#">Testing </a>
- 		</li>
- 		<li class="nav-item">
  			<a class="nav-link" href="#team">Team Members</a>
  		</li>
  		<li class="nav-item">
@@ -99,22 +75,10 @@ if(isset($_POST['submit'])){
 		</div>
 	</div>
 	<div class="carousel-item">
-		<img src="img/burger.png">
+		<img src="img/drinks.jpg">
 	</div>
 	<div class="carousel-item">
-		<img src="img/burger.png">
-	</div>
-</div>
-</div>
-
-<!--- Jumbotron -->
-<div class="container-fluid">
-<div class="row jumbotron">
-	<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-10">
-		<p class="lead">This will be some paragraph/text that we will be putting in . Need to be changed.</p>
-	</div>
-	<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-2">
-		<a href="#"><button type= "button class="btn btn-outline-secondary btn-lg > Button</button></a>
+		<img src="img/taco.jpg">
 	</div>
 </div>
 </div>
@@ -127,7 +91,7 @@ if(isset($_POST['submit'])){
 	</div>
 	<hr>
 	<div class="col-12">
-		<p class="lead">IT490 Project Paragraph!!! Leaving this area as of now so we can add more description to it later. (or we could put the api stuff here in this section) </p>
+		<p class="lead">Our Project's objective is to suggest users a restaurant food item that meets their desired daily maximum calorie intake and their location. </p>
 
 </div>
 </div>
@@ -186,7 +150,13 @@ if(isset($_POST['submit'])){
   </select>
 <br>
    <label for="exampleFormControlInput1"> Max Calories (Required) </label>
-   <input type = "text" class = "form-control" id = "Item6" name = "item6" placeholder = "Enter your desired Max Calories per day">
+   <input type = "text" class = "form-control" id = "Item6" name = "item6" placeholder = "Enter your desired Max Calories per day" required>
+
+
+
+   <label for ="exampleFormControlInput1">Location (Required)</label>
+   <input type = "text" class = "form-control" id = "Item7" name = "item7" placeholder = "Enter City and state" required>
+
 
     <input type="submit" name="submit" value="Submit" class="btn btn-success btn-block btn-lg">
 
@@ -200,58 +170,32 @@ if(isset($_POST['submit'])){
 		<br>
 		
 
-	<div class="col-lg-6">
-		<img src="img/placeholder.png" class="img-fluid">
-	</div>
 
 </div>
 </div>
+
 </form>
 
 
 <hr class="my-4">
 
-<!--- Fixed background -->
-<figure>
-	<div class="fixed-wrap">
-		<div id="fixed">
-		</div>
-	</div>
 
-</figure>
-
-<!--- Emoji Section -->
-
-<div id="emoji" class="collapse">
-	<div class="container-fluid padding">
-	<div class="row text-center">
-		<div class="col-sm-6 col-md-3">
-			<img class="gif" src="img/gif/panda.gif">
-		</div>
-		<div class="col-sm-6 col-md-3">
-			<img class="gif" src="img/gif/poo.gif">
-		</div>
-		<div class="col-sm-6 col-md-3">
-			<img class="gif" src="img/gif/unicorn.gif">
-		</div>
-		<div class="col-sm-6 col-md-3">
-			<img class="gif" src="img/gif/chicken.gif">
-		</div>
-
-</div>
-</div>
-</div>
-  
-<!--- Meet the team -->
+<!--- API -->
 <div class="container-fluid padding">
 <div class="row welcome text-center">
 	<div class="col-12">
-		<h1 class="display-4">Team Members</h1>
+		<h1 class="display-4"> APIs</h1> 
 	</div>
 	<hr>
+	<div class="col-12">
+		<p class="lead">APIs used: Spoonacular and Google Maps </p>
 
 </div>
 </div>
+
+
+
+
 
 <!--- Cards -->
 <section class="team" id="team">
