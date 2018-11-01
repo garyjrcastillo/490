@@ -1,35 +1,4 @@
 
-<?php
-session_start();
-
-$input = $_POST["item1"] ;
-
-echo " $input calories: ";
-
-include("spoonCall.php");
-
-
-$total = $total + $calories;
-echo "TOTAL CALORIES NOW is $total";
-
-
-//SECOND INPUT
-
-$input = $_POST["item2"];
-
-echo " $input calories: ";
-
-
-include("spoonCall.php");
-
-$total = $total + $calories;
-echo "TOTAL CALORIES NOW is $total";
-
-//LAST INPUT MAX
-$max = $_POST["item6"];
-
-?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -56,14 +25,10 @@ $max = $_POST["item6"];
  	<div class="collapse navbar-collapse" id="navbarResponsive">
  		<ul class="navbar-nav ml-auto">
  		<li class="nav-item active">
- 			<a class="nav-link" href="#">Home</a>
+ 			<a class="nav-link" href="mainpage.php">Home</a>
  		</li>
  		<li class="nav-item">
  			<a class="nav-link" href="#about">About</a>
- 		</li>
- 		<li class="nav-item">
- 			<a class="nav-link" href="#">Testing </a>
- 		</li>
  		<li class="nav-item">
  			<a class="nav-link" href="#team">Team Members</a>
  		</li>
@@ -79,54 +44,151 @@ $max = $_POST["item6"];
 </nav>
 
 <!--- Image Slider -->
-
-<!--- Jumbotron -->
-<div class="container-fluid">
-<div class="row jumbotron">
-	<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-10">
-		<p class="lead">This will be some paragraph/text that we will be putting in . Need to be changed.</p>
-	</div>
-	<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-2">
-		<a href="#"><button type= "button class="btn btn-outline-secondary btn-lg> Button</button></a>
-	</div>
-</div>
-</div>
-
 <!--- Welcome Section -->
 
 <?php
+
 session_start();
 
-$input = $_POST["item1"] ;
 
-echo " $input calories: ";
+//first input
 
-include("spoonCall.php");
+if($_POST["item1"] != "" ){
+	$input = $_POST["item1"] ;
+
+	echo "Number of calories in a $input : ";
+
+	include("spoonCall.php");
+
+	echo "<br>";
 
 
-$total = $total + $calories;
-echo "TOTAL CALORIES NOW is $total";
-
+	$total = $total + $calories;
+}
 
 //SECOND INPUT
 
-$input = $_POST["item2"];
 
-echo " $input calories: ";
+if($_POST["item2"] != "" ){
+
+	$input = $_POST["item2"];
+
+	echo "Number of calories in a $input : ";
 
 
-include("spoonCall.php");
+	include("spoonCall.php");
 
-$total = $total + $calories;
-echo "TOTAL CALORIES NOW is $total";
+	echo "<br>";
 
+
+	$total = $total + $calories;
+
+
+}
+
+
+//third submit
+
+
+if($_POST["item3"] != "" ){
+
+        $input = $_POST["item3"];
+
+	echo "Number of calories in a $input : ";
+
+
+
+        include("spoonCall.php");
+
+
+	echo "<br>";
+
+        $total = $total + $calories;
+
+}
+
+
+
+if($_POST["item4"] != "" ){
+
+        $input = $_POST["item4"];
+
+       
+	echo "Number of calories in a $input : ";
+
+        include("spoonCall.php");
+
+	echo "<br>";
+
+        $total = $total + $calories;
+        
+
+}
+
+if($_POST["item5"] != "" ){
+
+        $input = $_POST["item5"];
+
+        
+	echo "Number of calories in a $input : ";
+
+        include("spoonCall.php");
+
+	echo "<br>";
+
+        $total = $total + $calories;
+        
+
+}
+
+
+
+echo "<br>Total Amount of Calories you've consumed today: $total <br>";
 //LAST INPUT MAX
+
+
 $max = $_POST["item6"];
+echo "Your daily max calorie goal is $max <br>";
+
+if($total > $max){
+	echo "We can not suggest you a food because you have already passed your calorie goal of the day";
+
+}
+else{
+
+	$remainingCalories = $max - $total;
+	echo "Your remaining calorie intake for today is: ". $remainingCalories ."<br>";
+
+	echo"We will now suggest you a fast food menu item that will keep you under your calorie goal<br>";
+	
+	$location = $_POST["item7"];
+
+	include ("mapsCall.php");
+
+
+	include ("calorieCall.php");
+//	include ("spoonCallSuggestion.php");
+
+}
+
+
+//maps api call
+//$location = $_POST["item7"];
+
 
 ?>
 
+<body>
+<img src= '<?php echo $src?>'>
+<br>
 
+</body>
+<?php
 
+	$leftover = $remainingCalories - $matches3->nutrition->calories;
+	echo "Your remaining  calories for the day after this eating this fast food item is: ".$leftover;
+
+?>
 
 <!--- Three Column Section -->
 
@@ -142,6 +204,8 @@ $max = $_POST["item6"];
 	<div class="container-fluid padding">
 	<div class="row text-center">
 		<div class="col-sm-6 col-md-3">
+			
+		
 			<img class="gif" src="img/gif/panda.gif">
 		</div>
 		<div class="col-sm-6 col-md-3">
