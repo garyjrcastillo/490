@@ -1,4 +1,17 @@
+<?php
+session_start();
 
+
+unset( $_SESSION["register"] ); //so when rabbitMQClient executes it won't use the register function
+unset( $_SESSION["index"] ); //so when rabbitMQClient executes it won't use the index function (which is logging in)
+
+unset($_SESSION["api"]);
+
+$_SESSION["validate"] = 'true'; //so rabbitMQClient will check to see if they are validated
+include ("testRabbitMQClient.php");
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,15 +39,18 @@
  		<ul class="navbar-nav ml-auto">
  		<li class="nav-item active">
  			<a class="nav-link" href="mainpage.php">Home</a>
- 		</li>
- 		<li class="nav-item">
- 			<a class="nav-link" href="#about">About</a>
- 		<li class="nav-item">
- 			<a class="nav-link" href="#team">Team Members</a>
- 		</li>
- 		<li class="nav-item">
- 			<a class="nav-link" href="#">Contact</a>
- 		</li>
+		</li>
+
+                <li class="nav-item active">
+                        <a class="nav-link" href="historyrecord.php">History Record</a>
+                </li>
+
+
+
+                <li class="nav-item active">
+                        <a class="nav-link" href="likes.php">Likes Record</a>
+                </li>
+
  		<li class="nav-item">
  			<a class="nav-link" href="logout.php">Log out</a>
  	 		</li>
@@ -48,15 +64,21 @@
 
 <?php
 
-session_start();
+#session_start();
 
+#echo "session id: " . $_SESSION["sessionId"]; #
+#echo "username: " . $_SESSION["un"]; #
+
+echo "Hello " . $_POST["username"]. "!<br> Here are your results!"; #
+echo "<br><br>";
+echo "Number of calories for the fast food items you have eaten today:<br>";
 
 //first input
 
 if($_POST["item1"] != "" ){
 	$input = $_POST["item1"] ;
 
-	echo "Number of calories in a $input : ";
+	echo "$input = ";
 
 	include("spoonCall.php");
 
@@ -73,7 +95,7 @@ if($_POST["item2"] != "" ){
 
 	$input = $_POST["item2"];
 
-	echo "Number of calories in a $input : ";
+	echo "$input = ";
 
 
 	include("spoonCall.php");
@@ -94,7 +116,7 @@ if($_POST["item3"] != "" ){
 
         $input = $_POST["item3"];
 
-	echo "Number of calories in a $input : ";
+	echo "$input = ";
 
 
 
@@ -114,7 +136,7 @@ if($_POST["item4"] != "" ){
         $input = $_POST["item4"];
 
        
-	echo "Number of calories in a $input : ";
+	echo "$input = ";
 
         include("spoonCall.php");
 
@@ -130,7 +152,7 @@ if($_POST["item5"] != "" ){
         $input = $_POST["item5"];
 
         
-	echo "Number of calories in a $input : ";
+	echo "$input = ";
 
         include("spoonCall.php");
 
@@ -148,26 +170,37 @@ echo "<br>Total Amount of Calories you've consumed today: $total <br>";
 
 
 $max = $_POST["item6"];
-echo "Your daily max calorie goal is $max <br>";
+echo "<br>Your daily max calorie goal is $max <br>";
 
 if($total > $max){
-	echo "We can not suggest you a food because you have already passed your calorie goal of the day";
+	echo "<br>We can not suggest you a food because you have already passed your calorie goal of the day";
+	exit;
 
 }
 else{
 
 	$remainingCalories = $max - $total;
-	echo "Your remaining calorie intake for today is: ". $remainingCalories ."<br>";
+	echo "<br>Your remaining calorie intake for today is: ". $remainingCalories ."<br>";
 
-	echo"We will now suggest you a fast food menu item that will keep you under your calorie goal<br>";
+	echo"<br>We will now use your location with the Google Maps API to get the 20 nearest fast food restaurants near you <br>";
 	
-	$location = $_POST["item7"];
 
+
+	#--$location = $_POST["item7"];
+
+	$location = urlencode($_POST["item7"]);
 	include ("mapsCall.php");
 
 
 	include ("calorieCall.php");
+
+
 //	include ("spoonCallSuggestion.php");
+
+	
+#	echo "username: " . $_SESSION["un"] ;
+
+
 
 }
 
@@ -179,9 +212,23 @@ else{
 ?>
 
 <body>
+
+
 <img src= '<?php echo $src?>'>
 <br>
 
+Do you Like Food From <?php echo $fastFoodRestaurant?> ?
+<a href= "thumbsup.php" value =<?php echo $_SESSION["Restaurant"] ?> >
+	<img src="img/thumbs-up.png" style="width:100px;height:100px;">
+</a>
+
+<a href= "thumbsdown.php" value =<?php echo $_SESSION["Restaurant"] ?> >
+        <img src="img/thumbs-down.png" style="width:100px;height:100px;">
+</a>
+
+<br>
+
+<br>
 </body>
 <?php
 
@@ -189,6 +236,12 @@ else{
 	echo "Your remaining  calories for the day after this eating this fast food item is: ".$leftover;
 
 ?>
+<body>
+<br>
+<a href="historyrecord.php" value = <?php echo $_SESSION["un"] ?> >View History of Suggested Fast Food Items
+</a>
+
+</body>
 
 <!--- Three Column Section -->
 
