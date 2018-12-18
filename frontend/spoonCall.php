@@ -1,8 +1,18 @@
 <?php
+session_start();
+unset( $_SESSION["register"] ); //so when rabbitMQClient executes it won't use the register function
+unset( $_SESSION["index"] ); //so when rabbitMQClient executes it won't use the index function (which is logging in)
+
+unset( $_SESSION["validate"]);
+$_SESSION["api"] = 'true';
+$_SESSION["apiName"] = 'spoonacular users food calories';
+include('testRabbitMQClient.php');
+
+
 
 require_once 'src/Unirest.php';
 
-//$input = "burger";
+#$input = "burger";
 
 $response = Unirest\Request::get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/menuItems/search?query=$input",
   array(
@@ -12,7 +22,7 @@ $response = Unirest\Request::get("https://spoonacular-recipe-food-nutrition-v1.p
 );
 
 $matches = json_decode($response->raw_body);
-//var_dump($matches);
+#var_dump($matches);
 
 //echo $matches->menuItems[0]->id;
 //echo "\n";
@@ -21,7 +31,7 @@ $matches = json_decode($response->raw_body);
 $id = $matches->menuItems[0]->id;
 
 
-//echo $matches->menuItems[0]->image;
+#echo $matches->menuItems[0]->title;
 
 
 //print($response->code);
@@ -47,6 +57,9 @@ $matches2 = json_decode($response2->raw_body);
 echo $matches2->nutrition->calories;
 
 $calories = $matches2->nutrition->calories;
+
+echo " (Spoonacular retrieved this calorie estimate from: ". $matches->menuItems[0]->title . ")";
+ 
 
 echo "\n";
 ?>
