@@ -1,1 +1,4 @@
-In order to get the Spoonacular api you must use unirest to extract the data. You must gitclone the /unirest-php folder from github.com/Kong/unirest-php. Place this folder into your /var/www/html. Specifically, the folder titled 'src' should be inside the directory of /var/www/html in order to get my code to work.
+In order to get the Spoonacular api you must use unirest to extract the data. 
+You must gitclone the /unirest-php folder from github.com/Kong/unirest-php. 
+Place this folder into your /var/www/html. 
+Specifically, the folder titled 'src' should be inside the directory of /var/www/html in order to get my code to work.
