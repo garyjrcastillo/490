@@ -1,4 +1,15 @@
 <?php
+session_start();
+unset( $_SESSION["register"] ); //so when rabbitMQClient executes it won't use the register function
+unset( $_SESSION["index"] ); //so when rabbitMQClient executes it won't use the index function (which is logging in)
+
+unset( $_SESSION["validate"]);
+$_SESSION["api"] = 'true';
+$_SESSION["apiName"] = 'spoonacular calories leftover';
+
+
+include('testRabbitMQClient.php');
+
 require_once 'src/Unirest.php';
 
 //echo $ar[0];
