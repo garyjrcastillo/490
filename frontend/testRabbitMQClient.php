@@ -1,11 +1,11 @@
-#!/usr/bin/php
+
 <?php
 require_once('path.inc');
 require_once('get_host_info.inc');
 require_once('rabbitMQLib.inc');
 
 #include("index.php");
-//
+
 
 session_start();
 $client = new rabbitMQClient("testRabbitMQ.ini","testServer");
@@ -28,7 +28,8 @@ $request = array();
 	$request['username'] = $_POST['username'];
 	$request['password'] = $_POST['password'];
 	
-	
+	$_SESSION["un"] = $_POST['username']; #
+	$un = $_POST['username']; #	
 //	$request['username'] = 'test';
 	
 //	$request['password'] = 'test';
@@ -37,11 +38,24 @@ $request = array();
 	$response = $client->send_request($request);
 
 	echo "client received response: ".PHP_EOL;
-	print_r($response);
+#	print_r($response);
 
 	if ($response==1){
 		echo("RESPONSE WORKED");
-		$_SESSION["sessionId"] = 'random';
+
+		include('config.php');
+		$query = "SELECT * FROM loginform WHERE username = '$un' ";#
+		($t = mysqli_query($db,$query) ) or die(mysqli_error($db) );
+
+		$r = mysqli_fetch_array ($t, MYSQLI_ASSOC);
+
+		$id = $r["sessionID"]; #grabs the mysql sessionId from user
+
+	#	$_SESSION["ID"] = $id;
+
+
+		#$_SESSION["sessionId"] = 'random';
+		$_SESSION["sessionId"] = $r["sessionID"]; #this is the session used in validate which is sent to RabbitMQSERver 
 		header("Location: mainpage.php");
 	}
 	else{
@@ -63,15 +77,21 @@ if(isset($_SESSION["register"])){
 
 	$request['message'] = $msg;
 	$response = $client->send_request($request);
-	
-	echo "client received response: ".PHP_EOL;
-	
-	
-	print_r($response);
+
+#	print_r($response);
 
 	if ($response ==1){
-		header("Location: index.php");
-	}
+		$_SESSION["registerPrompt"] ='true';
+                header("Location: index.php");
+        }
+
+	header("Location: index.php");
+
+
+	#echo "client received response: ".PHP_EOL;
+	
+	
+	
 }
 
 
@@ -81,8 +101,8 @@ if(isset($_SESSION["validate"])){
 	$request['sessionId'] = $_SESSION["sessionId"] ;
 
 	$response = $client->send_request($request);
-	echo "client received response: ".PHP_EOL;
-	print_r($response);
+	#echo "client received response: ".PHP_EOL;
+#	print_r($response);
 
 	if ($response !=1)
 	{
@@ -92,6 +112,49 @@ if(isset($_SESSION["validate"])){
 	
 
 }
+
+
+if(isset($_SESSION["logs"])){
+        $request = array();
+        $request['type'] = "get_logs";
+
+	#$request['test'] = 'test' ;
+
+
+        $response = $client->send_request($request);
+        echo "client received response: ".PHP_EOL;
+        print_r($response);
+
+        #if ($response ==1)
+        #{
+        #        echo "WORKOKINGINGINGIN";
+        #}
+
+
+
+}
+
+if(isset($_SESSION["api"])){
+        $request = array();
+        $request['type'] = "get_api";
+
+        $request['name'] = $_SESSION["apiName"] ;
+
+
+        $response = $client->send_request($request);
+        #echo "client received response: ".PHP_EOL;
+       # print_r($response);
+
+        #if ($response ==1)
+        #{
+        #        echo "WORKOKINGINGINGIN";
+        #}
+
+
+
+}
+
+
 
 //if(isset($_SESSION["index"])){
 
@@ -137,7 +200,7 @@ if(isset($_SESSION["validate"])){
 //}
 
 
-echo "\n\n";
+#echo "\n\n";
 
-echo $argv[0]." END".PHP_EOL;
+#echo $argv[0]." END".PHP_EOL;
 
