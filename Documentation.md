@@ -77,9 +77,13 @@ Installed Packages:
 
 
 Roles:
+
 Gary Castillo - Back End Developer
+
 Yik Tam - Front End Developer
+
 Nithin Dronavalli - System Admin
+
 Denion Kaleci - DMZ Developer
 
 
