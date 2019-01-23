@@ -1,6 +1,0 @@
-$response = Unirest\Request::get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/menuItems/419357",
-  array(
-    "X-Mashape-Key" => "iNZANIulJZmsh726UKyfHfPDefuGp15u89ajsnohOaqZ5tBKfe",
-    "X-Mashape-Host" => "spoonacular-recipe-food-nutrition-v1.p.mashape.com"
-  )
-);
